@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio pribadi santri, pengajar, dan pengabdi An Naba Al Islamiyyah.">
+  <title>{{ profil.nama }} | Portofolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <a class="brand" href="#beranda">
+      <img src="{{ url_for('static', filename='images/logo-pesantren.jpg') }}" alt="Logo An Naba">
+      <span>PORTOFOLIO<span class="brand-dot">.</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#tentang">Tentang</a><a href="#keahlian">Keahlian</a>
+      <a href="#pengalaman">Pengalaman</a><a href="#kontak" class="nav-cta">Kontak</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="beranda">
+    <div class="hero-glow"></div>
+    <div class="hero-copy">
+      <p class="eyebrow"><span></span> PROFIL PRIBADI</p>
+      <h1>Belajar dengan ilmu,<br><em>bertumbuh</em> dengan pengabdian.</h1>
+      <p class="hero-desc">{{ profil.deskripsi }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#tentang">Kenali Saya <span>↗</span></a>
+        <a class="text-link" href="#pengalaman">Lihat perjalanan saya</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>10</strong><span>Angkatan</span></div>
+        <div class="meta-line"></div>
+        <div><strong>3+</strong><span>Bidang keahlian</span></div>
+        <div class="meta-line"></div>
+        <div><strong>∞</strong><span>Semangat belajar</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="portrait-frame">
+        <div class="portrait-top">AN NABA AL ISLAMIYYAH</div>
+        <img class="portrait" src="{{ url_for('static', filename='images/foto-profil.jpg') }}" alt="Foto profil">
+        <div class="portrait-caption">
+          <span>{{ profil.sapaan }}</span>
+          <strong>{{ profil.nama }}</strong>
+        </div>
+      </div>
+      <div class="floating-seal">
+        <img src="{{ url_for('static', filename='images/logo-akzaara.jpg') }}" alt="Logo Akzaara Generation">
+        <span>AKZAARA<br>GENERATION</span>
+      </div>
+    </div>
+    <div class="hero-bottom">AN NABA AL ISLAMIYYAH <span>•</span> TONJONG, BOGOR</div>
+  </header>
+
+  <main>
+    <section class="about section" id="tentang">
+      <div class="section-kicker">01 / TENTANG SAYA</div>
+      <div class="about-grid">
+        <div>
+          <h2>Menjadi pribadi yang<br><em>bermanfaat.</em></h2>
+          <p class="lead">Bukan hanya tentang apa yang kita ketahui, tetapi juga bagaimana ilmu itu memberi manfaat.</p>
+        </div>
+        <div class="about-text">
+          <p>{{ profil.deskripsi }}</p>
+          <div class="info-list">
+  <div>
+    <span>Nama Lengkap</span>
+    <strong>{{ profil.nama }}</strong>
+  </div>
+  <div>
+    <span>Pendidikan</span>
+    <strong>{{ profil.pendidikan }}</strong>
+  </div>
+  <div>
+    <span>Tempat Belajar</span>
+    <strong>{{ profil.pesantren }}</strong>
+  </div>
+  <div>
+    <span>Lokasi</span>
+    <strong>{{ profil.lokasi }}</strong>
+  </div>
+  <div>
+    <span>Angkatan</span>
+    <strong>{{ profil.angkatan }}</strong>
+  </div>
+  <div>
+    <span>Hobi</span>
+    <strong>{{ profil.hobi }}</strong>
+  </div>
+  <div>
+    <span>Cita-cita</span>
+    <strong>{{ profil.cita_cita }}</strong>
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="school-strip">
+        <img src="{{ url_for('static', filename='images/logo-pesantren.jpg') }}" alt="Logo pesantren">
+        <div><strong>{{ profil.pesantren }}</strong><span>{{ profil.lokasi }}</span></div>
+        <span class="strip-note">ILMU • ADAB • PENGABDIAN</span>
+      </div>
+    </section>
+
+    <section class="skills section" id="keahlian">
+      <div class="section-kicker">02 / KOMPETENSI</div>
+      <div class="section-heading">
+        <h2>Hal yang saya <em>kembangkan.</em></h2>
+        <p>Beberapa kemampuan yang terus saya latih melalui pembelajaran dan pengalaman.</p>
+      </div>
+      <div class="skill-grid">
+        {% for nama, deskripsi in keahlian %}
+        <article class="skill-card">
+          <span class="skill-number">0{{ loop.index }}</span>
+          <div class="skill-symbol">{{ ["ع","◉","▤","✦","⌘"][loop.index0] }}</div>
+          <h3>{{ nama }}</h3><p>{{ deskripsi }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="journey section" id="pengalaman">
+      <div class="section-kicker">03 / PERJALANAN</div>
+      <div class="section-heading">
+        <h2>Belajar, mengajar,<br><em>dan mengabdi.</em></h2>
+        <p>Pengalaman adalah ruang untuk bertumbuh dan belajar bertanggung jawab.</p>
+      </div>
+      <div class="timeline">
+        {% for item in pengalaman %}
+        <article class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span>{{ item.waktu }}</span><h3>{{ item.judul }}</h3><p>{{ item.isi }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="quote-section">
+      <img src="{{ url_for('static', filename='images/logo-akzaara.jpg') }}" alt="" class="quote-logo">
+      <p>“Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia lainnya.”</p>
+      <span>SEMANGAT AKZAARA GENERATION</span>
+    </section>
+
+    <section class="contact section" id="kontak">
+      <div class="section-kicker">04 / HUBUNGI SAYA</div>
+      <div class="contact-box">
+        <div><h2>Mari terhubung<br><em>dan berkolaborasi.</em></h2>
+          <p>Terbuka untuk diskusi, kegiatan pendidikan, dan kolaborasi positif.</p></div>
+        <a class="btn btn-gold" href="mailto:{{ profil.email }}">
+    Kirim Email <span>↗</span>
+</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">PORTOFOLIO<span>.</span></div>
+    <p>{{ profil.nama }} · {{ profil.angkatan }}</p>
+    <span>© 2026 — Dibuat dengan semangat belajar dan pengabdian.</span>
+  </footer>
+</body>
+</html>
